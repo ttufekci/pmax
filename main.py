@@ -5,8 +5,7 @@ from binance.client import Client
 import config
 import time
 
-def generateVar(high_array, low_array):
-    moving_average_length = 10
+def generateVar(high_array, low_array, moving_average_length = 10):
 
     valpha = 2/(moving_average_length + 1)
 
@@ -104,7 +103,7 @@ def generateVar(high_array, low_array):
 
     var = []
 
-    for i in range(0, len(high_array)-1):
+    for i in range(0, len(high_array)):
         var_current = (valpha * abs(vCMO[i])*hl2_left[i]) + (1 - valpha*abs(vCMO[i]))*var_before
         var.append(var_current)
         var_before = var_current
@@ -223,7 +222,7 @@ if __name__ == '__main__':
         open_array = open_array1[:-1]
 
         # Vidya (VAR) hesaplamasini yapiyorum
-        var_arr = generateVar(high_array, low_array)
+        var_arr = generateVar(high_array, low_array, moving_average_length=10)
 
         # Profit maximizer (pmax) hesaplamak icin, bir onceki satirda hesaplamis oldugum
         # var arrayini parametre olarak gonderiyorum
