@@ -112,6 +112,13 @@ def generateVar(high_array, low_array, moving_average_length = 10):
 
     return var_arr
 
+def generateEma(high_array, low_array, moving_average_length = 10):
+    hl2 = (high_array + low_array)/2
+
+    ema10 = ta.EMA(hl2, moving_average_length)
+
+    return ema10
+
 def generatePMax(var_array, close_array, high_array, low_array, atr_period, atr_multiplier):
 
     try:
@@ -188,6 +195,13 @@ if __name__ == '__main__':
     # zaman araligi, 5 dakikalik grafige bakiyorum
     interval = '5m'
 
+    # ortalama tipi olarak VAR seciyorum.
+    ortalama_tipi = 'VAR'
+
+    # ortalama tipi: EMA almak icin asagidaki commenti kaldirip, yukarıdaki var satırını
+    # commente alin
+    # ortalama_tipi = 'EMA'
+
     while 1:
         # binance'in limitlerine takilmamak icin, biraz bekliyoruz. 10 saniye kadar.
         time.sleep(10)
@@ -221,28 +235,55 @@ if __name__ == '__main__':
         open_array1 = np.asarray(open_klines)
         open_array = open_array1[:-1]
 
-        # Vidya (VAR) hesaplamasini yapiyorum
-        var_arr = generateVar(high_array, low_array, moving_average_length=10)
+        if ortalama_tipi == 'VAR':
 
-        # Profit maximizer (pmax) hesaplamak icin, bir onceki satirda hesaplamis oldugum
-        # var arrayini parametre olarak gonderiyorum
-        pmax = generatePMax(var_arr, close_array, high_array, low_array, 10, 3)
+            # Vidya (VAR) hesaplamasini yapiyorum
+            var_arr = generateVar(high_array, low_array, moving_average_length=10)
 
-        last_var = var_arr[-1]
-        previous_var = var_arr[-2]
+            # Profit maximizer (pmax) hesaplamak icin, bir onceki satirda hesaplamis oldugum
+            # var arrayini parametre olarak gonderiyorum
+            pmax = generatePMax(var_arr, close_array, high_array, low_array, 10, 3)
 
-        last_pmax = pmax[-1]
-        previous_pmax = pmax[-2]
+            last_var = var_arr[-1]
+            previous_var = var_arr[-2]
 
-        print('last var:', last_var, 'last pmax', last_pmax, flush=True)
+            last_pmax = pmax[-1]
+            previous_pmax = pmax[-2]
 
-        if (last_var > last_pmax and previous_var < previous_pmax):
-            msg = f'buy signal for {pair}'
-            print(msg, flush=True)
+            print('last var:', last_var, 'last pmax', last_pmax, flush=True)
 
-        if last_var < last_pmax and previous_var > previous_pmax:
-            msg = f'sell signal for {pair}'
-            print(msg, flush=True)
+            if (last_var > last_pmax and previous_var < previous_pmax):
+                msg = f'buy signal for {pair}'
+                print(msg, flush=True)
 
+            if last_var < last_pmax and previous_var > previous_pmax:
+                msg = f'sell signal for {pair}'
+                print(msg, flush=True)
+
+
+        elif ortalama_tipi == 'EMA':
+
+            # Vidya (VAR) hesaplamasini yapiyorum
+            ema_arr = generateEma(high_array, low_array, moving_average_length=10)
+
+            # Profit maximizer (pmax) hesaplamak icin, bir onceki satirda hesaplamis oldugum
+            # var arrayini parametre olarak gonderiyorum
+            pmax = generatePMax(ema_arr, close_array, high_array, low_array, 10, 3)
+
+            last_ema = ema_arr[-1]
+            previous_ema = ema_arr[-2]
+
+            last_pmax = pmax[-1]
+            previous_pmax = pmax[-2]
+
+            print('last ema:', last_ema, 'last pmax', last_pmax, flush=True)
+
+            if (last_ema > last_pmax and previous_ema < previous_pmax):
+                msg = f'buy signal for {pair}'
+                print(msg, flush=True)
+
+            if last_ema < last_pmax and previous_ema > previous_pmax:
+                msg = f'sell signal for {pair}'
+                print(msg, flush=True)
 
 
