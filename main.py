@@ -263,7 +263,7 @@ if __name__ == '__main__':
 
         elif ortalama_tipi == 'EMA':
 
-            # Vidya (VAR) hesaplamasini yapiyorum
+            # EMA (EMA) hesaplamasini yapiyorum
             ema_arr = generateEma(high_array, low_array, moving_average_length=10)
 
             # Profit maximizer (pmax) hesaplamak icin, bir onceki satirda hesaplamis oldugum
