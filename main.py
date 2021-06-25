@@ -177,7 +177,7 @@ def generatePMax(var_array, close_array, high_array, low_array, atr_period, atr_
 
 if __name__ == '__main__':
     #python binance client objemizi olusturuyoruz.
-    client = Client(config.API_KEY, config.API_SECRET, tld='us')
+    client = Client(config.API_KEY, config.API_SECRET)
 
     # ikilimizi seciyoruz
     pair = 'ETHUSDT'
@@ -200,7 +200,7 @@ if __name__ == '__main__':
             msg = f'exception in get_klines {str(exp)}'
             print(msg, flush=True)
             time.sleep(10)
-            client = Client(config.API_KEY, config.API_SECRET, tld='us')
+            client = Client(config.API_KEY, config.API_SECRET)
             continue
 
         open_time = [int(entry[0]) for entry in klines]
