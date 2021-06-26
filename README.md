@@ -8,3 +8,9 @@ Profit maximizer (pmax) VAR (Vidya) ortalama tipini kullanırsanız yatay piyasa
 Blog sayfamdan kod ile ilgili daha detaylı açıklamaya erişebilirsiniz.
 
 https://www.onbirkod.com/profit-maximizer-pmax-supertrendin-bir-tik-otesi-python-ile-yazalim/
+
+pmax indikatörünün geliştiricisi Kıvanç Özbilgiç'in konu ile ilgili detaylı anlatımı:
+
+Profit Maximizer – PMax İndikatörü Anlatımı with English Subtitles – YouTube
+
+https://www.youtube.com/watch?v=yR6tkDTTjCQ
