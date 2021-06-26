@@ -14,3 +14,6 @@ pmax indikatörünün geliştiricisi Kıvanç Özbilgiç'in konu ile ilgili deta
 Profit Maximizer – PMax İndikatörü Anlatımı with English Subtitles – YouTube
 
 https://www.youtube.com/watch?v=yR6tkDTTjCQ
+
+tradingview linki:
+https://tr.tradingview.com/script/sU9molfV/
